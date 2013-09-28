@@ -9,7 +9,7 @@
 
 ###Installation:
 
-Installation PureData Extend and Processing should be straightforward. Here's how to get oscP5 going:
+Installing PureData Extend and Processing should be straightforward. Here's how to get oscP5 going:
 
 #####oscP5 and PBox2D
 
