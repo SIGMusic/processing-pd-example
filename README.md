@@ -1,6 +1,17 @@
 # SIGMusic Processing PD Example
 
-###Requirements
+###Requirements:
 
 - [PureData Extended](http://puredata.info/downloads/pd-extended)
 - [Processing](https://processing.org/download/?processing)
+  - oscP5 - osc for Processing
+
+###Installation:
+
+Installation PureData Extend and Processing should be straightforward. Here's how to get oscP5 going:
+
+#####oscP5
+
+  1. Open Processing. Go to Sketch > Import Library... > Add Library...
+  2. Search "oscP5"
+  3. Select oscP5 and install
