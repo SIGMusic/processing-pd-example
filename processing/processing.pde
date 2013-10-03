@@ -7,21 +7,54 @@ import org.jbox2d.common.*;
 import org.jbox2d.dynamics.*;
 import org.jbox2d.dynamics.joints.*;
 
+OscP5 oscP5;
+NetAddress broadcastLocation;
+
+String ip = "127.0.0.1";
+int port = 9002;
+int incoming_port = 12312;
+
+PBox2D box2d;
+
+ArrayList<Box> boxes;
 
 void setup() { 
-  
+  size(600, 600);
+  frameRate(60);
+  oscP5 = new OscP5(this, incoming_port);
+  broadcastLocation = new NetAddress(ip, port);
+  sendMsg("/vol", 0.5);
+  sendMsg("/bypass", 1);
+
+  box2d = new PBox2D(this);
+  box2d.createWorld();
+  box2d.setGravity(0, -5);
+
+  boxes = new ArrayList<Box>();
 } 
 
 void sendMsg(String label, float data) {
- 
+  OscMessage msg = new OscMessage(label);
+  msg.add(data);
+  oscP5.send(msg, broadcastLocation);
 }
 
 void draw() {
+  background(102, 240, 0);
+  line(25, 25, mouseX, mouseY);
 
+  box2d.step();
+  for (Box b:boxes) {
+    b.display();
+  }
 } 
 
 void mousePressed() {
-
+  Box box = new Box(mouseX, mouseY);
+  boxes.add(box);
+  sendMsg("/freq", width - mouseX + 400);
+  sendMsg("/vol", (float)(float)(height - mouseY)/(float) height);
+  sendMsg("/bang", 1);
 }
 
 // The Nature of Code
